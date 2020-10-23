@@ -1,5 +1,8 @@
 package com.cg;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +50,17 @@ public class InvoiceServiceTester {
 				new Ride(1.0, 5)
 		};
 		InvoiceSummary invoiceSummary = invoiceGenerator.getInvoiceSummary(rides);
+		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(3, 80.0);
+		Assert.assertEquals(expectedInvoiceSummary, invoiceSummary);
+	}
+	@Test
+	public void givenUserId_ShouldReturnInvoiceSummary() {
+		RideRepository[] repositoryList = {new RideRepository(101, new Ride[]{new Ride(5.0, 10), new Ride(0.3, 1), new Ride(1.0, 5)}),
+										   new RideRepository(102, new Ride[]{new Ride(5.5, 10), new Ride(0.2, 2), new Ride(3.0, 7)}),
+										   new RideRepository(103, new Ride[]{new Ride(6.0, 10), new Ride(0.1, 3), new Ride(5.0, 10)})
+										   };
+		InvoiceService invoiceService = new InvoiceService(Arrays.asList(repositoryList));
+		InvoiceSummary invoiceSummary = invoiceService.getInvoice(101);
 		InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(3, 80.0);
 		Assert.assertEquals(expectedInvoiceSummary, invoiceSummary);
 	}
