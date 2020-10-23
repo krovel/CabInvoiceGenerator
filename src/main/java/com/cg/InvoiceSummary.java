@@ -20,8 +20,13 @@ public class InvoiceSummary {
 		if (getClass() != obj.getClass())
 			return false;
 		InvoiceSummary other = (InvoiceSummary) obj;
-		if(other.numOfRides==this.numOfRides && this.totalFare==other.totalFare && this.averageFare==other.averageFare)
-			return true;
-		else return false;
+		if (Double.doubleToLongBits(averageFare) != Double.doubleToLongBits(other.averageFare))
+			return false;
+		if (numOfRides != other.numOfRides)
+			return false;
+		if (Double.doubleToLongBits(totalFare) != Double.doubleToLongBits(other.totalFare))
+			return false;
+		return true;
 	}
+
 }
